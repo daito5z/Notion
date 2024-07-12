@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        background-color: transparent;
+        color: #d4af37;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+      .progress-container {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+      }
+      .progress-bar {
+        width: 300px;
+        height: 20px;
+        background-color: transparent;
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+        margin-right: 10px;
+        border: 2px solid #d4af37; /* Add border */
+      }
+      .progress {
+        height: 100%;
+        background-color: #d4af37;
+        line-height: 20px;
+        color: black;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .progress-text {
+        display: flex;
+        justify-content: space-between;
+        width: 80px;
+      }
+    </style>
+    <script>
+      function updateProgressBars() {
+        const birthDate = new Date(2005, 8, 1); // September 1, 2005 (months are 0-indexed)
+        const lifespanYears = 80;
+        const currentDate = new Date();
+
+        // Life progress calculation
+        const ageDays = (currentDate - birthDate) / (1000 * 60 * 60 * 24);
+        const lifeProgress = (ageDays / (lifespanYears * 365.25)) * 100;
+
+        // Year progress calculation
+        const startOfYear = new Date(currentDate.getFullYear(), 0, 1);
+        const endOfYear = new Date(currentDate.getFullYear(), 11, 31);
+        const daysInYear =
+          (endOfYear - startOfYear) / (1000 * 60 * 60 * 24) + 1;
+        const daysPassedInYear =
+          (currentDate - startOfYear) / (1000 * 60 * 60 * 24) + 1;
+        const yearProgress = (daysPassedInYear / daysInYear) * 100;
+
+        // Update progress bars
+        document.getElementById("life-progress").style.width =
+          lifeProgress.toFixed(2) + "%";
+        document.getElementById("life-percentage").innerText =
+          lifeProgress.toFixed(2) + "%";
+        document.getElementById("year-progress").style.width =
+          yearProgress.toFixed(2) + "%";
+        document.getElementById("year-percentage").innerText =
+          yearProgress.toFixed(2) + "%";
+      }
+
+      document.addEventListener("DOMContentLoaded", updateProgressBars);
+    </script>
+  </head>
+  <body>
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress" id="life-progress"></div>
+      </div>
+      <div class="progress-text">
+        <span>Life:</span>
+        <span id="life-percentage">0%</span>
+      </div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress" id="year-progress"></div>
+      </div>
+      <div class="progress-text">
+        <span>Year:</span>
+        <span id="year-percentage">0%</span>
+      </div>
+    </div>
+  </body>
+</html>

@@ -14,6 +14,10 @@
         height: 100vh;
         flex-direction: column;
         overflow-y: hidden;
+        scrollbar-width: none; /* For Firefox */
+      }
+      body::-webkit-scrollbar {
+        display: none; /* For Chrome, Safari, and Edge */
       }
       .progress-container {
         display: flex;
